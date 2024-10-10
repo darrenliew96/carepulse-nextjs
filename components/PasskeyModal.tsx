@@ -28,8 +28,8 @@ const PasskeyModal = () => {
   const [error, setError] = useState("");
 
   const encryptedKey =
-    typeof windows !== "undefined"
-      ? windows.localStorage.getItem("accessKey")
+    typeof window !== "undefined"
+      ? window.localStorage.getItem("accessKey")
       : null;
 
   useEffect(() => {
