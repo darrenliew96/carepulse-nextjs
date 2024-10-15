@@ -10,7 +10,7 @@ import SubmitButton from "../SubmitButton";
 import { useState } from "react";
 import { PatientFormValidation } from "@/lib/validation";
 import { useRouter } from "next/navigation";
-import { createUser, registerPatient } from "@/lib/actions/patient.actions";
+import { registerPatient } from "@/lib/actions/patient.actions";
 import { FormFieldType } from "./PatientForm";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import {
@@ -49,8 +49,8 @@ const RegisterForm = ({ user }: { user: User }) => {
       });
 
       formData = new FormData();
-      formData.append( 'blobFile', blobFile);
-      formData.append('fileName', values.identificationDocument[0].name);
+      formData.append("blobFile", blobFile);
+      formData.append("fileName", values.identificationDocument[0].name);
     }
 
     try {
@@ -59,10 +59,9 @@ const RegisterForm = ({ user }: { user: User }) => {
         userId: user.$id,
         birthDate: new Date(values.birthDate),
         identificationDocument: formData,
-
-      }
+      };
       const patient = await registerPatient(patientData);
-      if(patient) router.push(`/patients/${user.$id}/new-appointment`)
+      if (patient) router.push(`/patients/${user.$id}/new-appointment`);
     } catch (error) {
       console.error(error);
     }
@@ -133,7 +132,7 @@ const RegisterForm = ({ user }: { user: User }) => {
                   onValueChange={field.onChange}
                   defaultValue={field.value}
                 >
-                  {GenderOptions.map((option, i) => (
+                  {GenderOptions.map((option) => (
                     <div key={option} className="radio-group">
                       <RadioGroupItem value={option} id={option} />
                       <Label htmlFor={option} className="cursor-point">
